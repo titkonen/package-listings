@@ -1,45 +1,41 @@
 import React, { useState } from 'react';
-import { sampledata } from './test.json';
+import { sampledata } from './sample.json';
 
+// Reads sample data from JSON file
 function ReadJson() {
    const [packageList, setPackageList] = useState(sampledata);
+   console.log(sampledata); 
 
-   // console.log(sampledata);
-
+   // Sorting list in alphabetical order
    const sortByName = () => {
       const sorted = [...packageList].sort((a, b) => {
          var nameA = a.name.toUpperCase();
          var nameB = b.name.toUpperCase();
          if (nameA < nameB) {
             return -1;
-          }
-          if (nameA > nameB) {
+         }
+         if (nameA > nameB) {
             return 1;
-          }
-         
+         }
+         return 0;  
       });
       setPackageList(sorted);
-      console.log(sorted);
-      // alert(sorted[a - b].name);
    };
-
       return ( 
          <div>
             <button onClick={sortByName}>Sort in alphabetical order</button>
-             <ul>
+             <ul> 
                {packageList.map(({ name, description, id, url, url2 }) => (
                   <li key={id}>
-                     <b><a href={name}>{name} </a></b>
-                     {/* <i>{Description}</i> */}
-                     {/* <a href={url}>{url} </a>
-                     <a href={url2}>{url2} </a> */}
+                     <b><a href={name}>{name} </a></b><br></br>
+                     <i>{description}</i> <br></br>
+                     <a href={url}>{url} </a><br></br>
+                     <a href={url2}>{url2} </a><br></br>
+                     <br></br>
                   </li>
-
                ))}
             </ul>
          </div>
-         
-
       );
 }
 
